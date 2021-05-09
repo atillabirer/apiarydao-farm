@@ -3,11 +3,15 @@ pragma solidity 0.6.12;
 import "@pancakeswap/pancake-swap-lib/contracts/token/BEP20/BEP20.sol";
 
 // CakeToken with Governance.
-contract CakeToken is BEP20('PancakeSwap Token', 'Cake') {
+contract CakeToken is BEP20('Honeycomb Token', 'HNYC') {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
     function mint(address _to, uint256 _amount) public onlyOwner {
         _mint(_to, _amount);
         _moveDelegates(address(0), _delegates[_to], _amount);
+    }
+
+    constructor() public {
+        mint(msg.sender,20000);
     }
 
     // Copied and modified from YAM code:
@@ -17,7 +21,7 @@ contract CakeToken is BEP20('PancakeSwap Token', 'Cake') {
     // https://github.com/compound-finance/compound-protocol/blob/master/contracts/Governance/Comp.sol
 
     /// @notice A record of each accounts delegate
-    mapping (address => address) internal _delegates;
+    mapping (address => address) internal _delegates; 
 
     /// @notice A checkpoint for marking number of votes from a given block
     struct Checkpoint {

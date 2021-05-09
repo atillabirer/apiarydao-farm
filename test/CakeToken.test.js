@@ -1,15 +1,33 @@
-const { assert } = require("chai");
+const { assertion } = require("@openzeppelin/test-helpers/src/expectRevert");
 
-const CakeToken = artifacts.require('CakeToken');
+const CakeToken = artifacts.require("CakeToken");
 
-contract('CakeToken', ([alice, bob, carol, dev, minter]) => {
-    beforeEach(async () => {
-        this.cake = await CakeToken.new({ from: minter });
+// Traditional Truffle test
+// contract("CakeToken", accounts => {
+//   it("Should return the new greeting once it's changed", async function() {
+//     const greeter = await Greeter.new("Hello, world!");
+//     assert.equal(await greeter.greet(), "Hello, world!");
+
+//     await greeter.setGreeting("Hola, mundo!");
+
+//     assert.equal(await greeter.greet(), "Hola, mundo!");
+//   });
+// });
+
+// Vanilla Mocha test. Increased compatibility with tools that integrate Mocha.
+describe("CakeToken contract", function() {
+  let accounts;
+  let cakeToken;
+
+  before(async function() {
+    accounts = await web3.eth.getAccounts();
+    cakeToken = await CakeToken.new()
+
+  });
+
+  describe("Deployment", function() {
+    it("Should deploy with the right greeting", async function() {
+      assert.equal(await cakeToken.balanceOf(accounts[0]),20000)
     });
-
-
-    it('mint', async () => {
-        await this.cake.mint(alice, 1000, { from: minter });
-        assert.equal((await this.cake.balanceOf(alice)).toString(), '1000');
-    })
+  });
 });

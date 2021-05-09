@@ -1,5 +1,6 @@
 const { expectRevert, time } = require('@openzeppelin/test-helpers');
 const { assert } = require('chai');
+const {artifacts} = require("hardhat")
 const CakeToken = artifacts.require('CakeToken');
 const BnbStaking = artifacts.require('BnbStaking');
 const MockBEP20 = artifacts.require('libs/MockBEP20');
