@@ -3,7 +3,7 @@ pragma solidity 0.6.12;
 import "@pancakeswap/pancake-swap-lib/contracts/token/BEP20/BEP20.sol";
 
 // CakeToken with Governance.
-contract CakeToken is BEP20('Honeycomb Token', 'HNYC') {
+contract HoneyCombToken is BEP20('Cryptosphere Token', 'CRY') {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
     function mint(address _to, uint256 _amount) public onlyOwner {
         _mint(_to, _amount);
@@ -11,7 +11,7 @@ contract CakeToken is BEP20('Honeycomb Token', 'HNYC') {
     }
 
     constructor() public {
-        mint(msg.sender,20000);
+        mint(msg.sender,1000000 * (10 ** 18));
     }
 
     // Copied and modified from YAM code:

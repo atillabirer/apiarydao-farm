@@ -2,10 +2,10 @@ pragma solidity 0.6.12;
 
 import "@pancakeswap/pancake-swap-lib/contracts/token/BEP20/BEP20.sol";
 
-import "./CakeToken.sol";
+import "./HoneyCombToken.sol";
 
 // SyrupBar with Governance.
-contract SyrupBar is BEP20('SyrupBar Token', 'SYRUP') {
+contract SyrupBar is BEP20('Apiary DAO token', 'DAO') {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
     function mint(address _to, uint256 _amount) public onlyOwner {
         _mint(_to, _amount);
@@ -18,11 +18,11 @@ contract SyrupBar is BEP20('SyrupBar Token', 'SYRUP') {
     }
 
     // The CAKE TOKEN!
-    CakeToken public cake;
+    HoneyCombToken public cake;
 
 
     constructor(
-        CakeToken _cake
+        HoneyCombToken _cake
     ) public {
         cake = _cake;
     }

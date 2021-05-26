@@ -1,8 +1,10 @@
 require("solidity-coverage");
 require("@nomiclabs/hardhat-truffle5");
+require("@nomiclabs/hardhat-ethers");
+require("@nomiclabs/hardhat-etherscan");
 
 
-const mnemonic="juice oyster rapid else bag youth aspect round path cruel peanut trash";
+const mnemonic = "juice oyster rapid else bag youth aspect round path cruel peanut trash";
 // This is a sample Buidler task. To learn how to create your own go to
 // https://buidler.dev/guides/create-task.html
 task("accounts", "Prints the list of accounts", async () => {
@@ -20,11 +22,22 @@ task("accounts", "Prints the list of accounts", async () => {
 module.exports = {
   // This is a sample solc configuration that specifies which version of solc to use
   solidity: {
-    version: "0.6.12",
-    optimizer: {
-      enabled: true,
-      runs: 200,
-    },
+    compilers: [
+      {
+
+        version: "0.6.12",
+        settings: {
+          optimizer: true
+        }
+
+      },
+      {
+        version: "0.5.16",
+        settings: {
+          optimizer: true
+        }
+      }
+    ]
   },
 
   networks: {
@@ -44,6 +57,18 @@ module.exports = {
       port: 7545,
       network_id: "*",
     },
+    bscTestnet: {
+      url: "https://data-seed-prebsc-1-s1.binance.org:8545",
+      chainId: 97,
+      gasPrice: 20000000000,
+      accounts: { mnemonic: mnemonic }
+    },
+    mainnet: {
+      url: "https://bsc-dataseed.binance.org/",
+      chainId: 56,
+      gasPrice: 20000000000,
+      accounts: {mnemonic: mnemonic}
+    }
   },
   paths: {
     sources: "./contracts",
