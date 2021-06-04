@@ -3,8 +3,8 @@ require("@nomiclabs/hardhat-truffle5");
 require("@nomiclabs/hardhat-ethers");
 require("@nomiclabs/hardhat-etherscan");
 
-
-const mnemonic = "juice oyster rapid else bag youth aspect round path cruel peanut trash";
+const mnemonic =
+  "juice oyster rapid else bag youth aspect round path cruel peanut trash";
 // This is a sample Buidler task. To learn how to create your own go to
 // https://buidler.dev/guides/create-task.html
 task("accounts", "Prints the list of accounts", async () => {
@@ -24,28 +24,26 @@ module.exports = {
   solidity: {
     compilers: [
       {
-
         version: "0.6.12",
         settings: {
-          optimizer: true
-        }
-
+          optimizer: true,
+        },
       },
       {
         version: "0.5.16",
         settings: {
-          optimizer: true
-        }
-      }
-    ]
+          optimizer: true,
+        },
+      },
+    ],
   },
 
   networks: {
     hardhat: {
       blockGasLimit: 12000000,
       accounts: {
-        mnemonic
-      }
+        mnemonic,
+      },
     },
     development: {
       url: "http://127.0.0.1:7545",
@@ -61,14 +59,14 @@ module.exports = {
       url: "https://data-seed-prebsc-1-s1.binance.org:8545",
       chainId: 97,
       gasPrice: 20000000000,
-      accounts: { mnemonic: mnemonic }
+      accounts: { mnemonic: mnemonic },
     },
     mainnet: {
       url: "https://bsc-dataseed.binance.org/",
       chainId: 56,
       gasPrice: 20000000000,
-      accounts: {mnemonic: mnemonic}
-    }
+      accounts: { mnemonic: mnemonic },
+    },
   },
   paths: {
     sources: "./contracts",
