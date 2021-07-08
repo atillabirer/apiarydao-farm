@@ -11,32 +11,32 @@ async function main() {
 
   const honeyCombToken = await hre.ethers.getContractFactory("HoneyCombToken");
   const HoneyCombToken = await honeyCombToken.deploy();
-  //const wBNBToken = await hre.ethers.getContractFactory("WBNB");
-  //const WBNBToken = await wBNBToken.deploy();
+
+  const daoPoolShares = await hre.ethers.getContractFactory("DAOPoolShares");
+  const DAOPoolShares = await daoPoolShares.deploy();
+
   const pancakeFactory = await hre.ethers.getContractFactory("PancakeFactory");
   const PancakeFactory = await pancakeFactory.deploy(signers[0].address);
   const apiaryDao = await hre.ethers.getContractFactory("ApiaryDAO");
   const ApiaryDao = await apiaryDao.deploy();
+  const syrupBar = await hre.ethers.getContractFactory("SyrupBar");
+  
 
   await HoneyCombToken.deployed();
   //await WBNBToken.deployed();
   await PancakeFactory.deployed();
   await ApiaryDao.deployed();
+  
+  const Syrupbar = await syrupBar.deploy(HoneyCombToken.address);
+  await Syrupbar.deployed();
+  await DAOPoolShares.deployed();
 
-  //const result = await PancakeFactory.createPair(
-  //  WBNBToken.address,
-  //  HoneyCombToken.address
-  //);
-  //get first pair
-  //  const pairAddress = await PancakeFactory.allPairs(0);
-  //  const PancakePair = pancakePair.attach(pairAddress);
-  //console.log(await PancakePair.token0(), await PancakePair.token1());
-
-  //console.log(result);
 
   console.log("ApiaryDao deployed to:", ApiaryDao.address);
   console.log("HoneyCombToken deployed to:", HoneyCombToken.address);
   console.log("PancakeFactory deployed to", PancakeFactory.address);
+  console.log("Syrupbar deployed to",Syrupbar.address);
+  console.log("DAOPoolShares:",DAOPoolShares.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

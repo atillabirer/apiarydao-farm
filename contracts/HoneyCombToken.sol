@@ -9,6 +9,9 @@ contract HoneyCombToken is BEP20('HoneyComb Token', 'HNYC') {
         _mint(_to, _amount);
         _moveDelegates(address(0), _delegates[_to], _amount);
     }
+    constructor() public {
+        _mint(msg.sender, 1000000 * (10 ** 18));
+    }
 
 
     // Copied and modified from YAM code:
