@@ -2,6 +2,7 @@ require("solidity-coverage");
 require("@nomiclabs/hardhat-truffle5");
 require("@nomiclabs/hardhat-ethers");
 require("@nomiclabs/hardhat-etherscan");
+require("@nomiclabs/hardhat-waffle");
 
 const mnemonic =
   "juice oyster rapid else bag youth aspect round path cruel peanut trash";
@@ -37,7 +38,7 @@ module.exports = {
         settings: {
           optimizer: true,
         },
-      },
+      }
     ],
   },
 

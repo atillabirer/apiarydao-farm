@@ -1,19 +1,29 @@
 pragma solidity 0.6.12;
 
-import "@pancakeswap/pancake-swap-lib/contracts/token/BEP20/BEP20.sol";
 
+import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@pancakeswap/pancake-swap-lib/contracts/token/BEP20/BEP20.sol";
 // CakeToken with Governance.
-contract HoneyCombToken is BEP20('HoneyComb Token', 'HNYC') {
+contract HoneyCombToken is BEP20('HoneyComb Token', 'HNYC'),AccessControl {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
-    function mint(address _to, uint256 _amount) public onlyOwner {
+    bytes32 public constant MINTER = keccak256("MINTER");
+
+
+ 
+    constructor() public {
+        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender); 
+        
+    }
+    function addNewMinter(address minter) public {
+        require(hasRole(DEFAULT_ADMIN_ROLE, msg.sender),"You do not have privileges for this");
+        grantRole(MINTER, minter);
+    }
+
+   function mint(address _to, uint256 _amount) public {
+        require(hasRole(MINTER, msg.sender),"You are not a minter.");
         _mint(_to, _amount);
         _moveDelegates(address(0), _delegates[_to], _amount);
     }
-    constructor() public {
-        _mint(msg.sender, 1000000 * (10 ** 18));
-    }
-
-
     // Copied and modified from YAM code:
     // https://github.com/yam-finance/yam-protocol/blob/master/contracts/token/YAMGovernanceStorage.sol
     // https://github.com/yam-finance/yam-protocol/blob/master/contracts/token/YAMGovernance.sol
