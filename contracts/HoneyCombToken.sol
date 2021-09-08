@@ -4,7 +4,7 @@ pragma solidity 0.6.12;
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@pancakeswap/pancake-swap-lib/contracts/token/BEP20/BEP20.sol";
 // CakeToken with Governance.
-contract HoneyCombToken is BEP20('HoneyComb Token', 'HNYC'),AccessControl {
+contract HoneyCombToken is AccessControl,BEP20('HoneyComb Token', 'HNYC') {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
     bytes32 public constant MINTER = keccak256("MINTER");
 
